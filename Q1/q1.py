@@ -22,20 +22,25 @@ class ffnn:
         for i in range(1, len(self.layer_sizes)):
             self.layers.append(self.layer(self.layer_sizes[i - 1], self.layer_sizes[i]))
 
-        print(len(self.layers))
-        for i in self.layers:
-            print(i)
-
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
+    def ReLU(self, x):
+        return np.maximum(0, x)
+
+    def hyperbolic_tangent(self, x):
+        return np.tanh(x)
+
     def forward_propigation(self, inputs):
         x = inputs
+        print(self.layers)
         for i in self.layers:
             x = self.sigmoid(np.dot(i.weights, x) + i.bias)
         return x
 
-nerualnet = ffnn([4, 5, 2])
-nerualnet.init_layers()
-print()
-print(nerualnet.forward_propigation(np.array([4, 6, 2, 6])))
+    def loss(self, inputs, outputs):
+        expected = outputs
+        predicted = self.forward_propigation(inputs)
+        print(f"{expected} \n {predicted}")
+        return expected - predicted
+
