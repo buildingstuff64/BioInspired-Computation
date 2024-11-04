@@ -5,11 +5,11 @@
   "layer_sizes": [8, 100, 1],
   "activation": "sigmoid",
 
-  "informants": 15,
-  "alpha": 0.9,
+  "informants": 5,
+  "alpha": 0.90,
   "beta": 0.8,
-  "gamma": 0.40,
+  "gamma": 0.2,
   "delta": 0.01,
-  "random": 2
+  "random": 1
 
 }

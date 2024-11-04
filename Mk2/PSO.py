@@ -56,6 +56,7 @@ class Particle:
         self.ANN = ANN(js['layer_sizes'], js['activation'])
         self.position = self.ANN.get_wb()
         self.velocity = np.random.rand(*self.position.shape) * js['random']
+        self.velocity.clip(min=-1, max=1)
         self.personal_best = np.copy(self.position)
         self.best_fitness = float('inf')
         self.last_fitness = float('inf')
@@ -70,3 +71,4 @@ class Particle:
                 self.js['gamma'] * r2 * (informants_best - self.position) +
                 self.js['delta'] * r3 * (global_best - self.position)
         )
+        self.velocity.clip(min=-1, max=1)
