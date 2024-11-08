@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-from scipy.special import rel_entr
 from tqdm import tqdm
-from ANN import ANN
+from Mk2.ANN import ANN
 import numpy as np
 import random
 import json
+from multiprocessing import Manager, Queue
 
 
 class PSO:
@@ -16,13 +16,15 @@ class PSO:
         self.best_position = None
         self.debug = False
 
-    def optimise(self, debug=False):
+    def optimise(self, q=None):
         global_best_position = None
         epoch_best_fitness = []
         global_best_fitness = float('inf')
 
-
         for i in tqdm(range(self.js['iterations']), desc = "Training...", disable = not self.debug):
+            if q is not None:
+                q.put_nowait(i / self.js['iterations'])
+
             for particle in self.swarm:
                 fitness = particle.ANN.calc_loss(self.input_training_data, self.output_training_data)
                 particle.last_fitness = fitness
@@ -51,7 +53,6 @@ class PSO:
 
 
         self.best_position = global_best_position
-        plt.show()
         return global_best_position, epoch_best_fitness
 
     def test(self):
