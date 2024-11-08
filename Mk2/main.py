@@ -1,5 +1,5 @@
 import json
-from random import random
+from random import random, Random
 
 import pandas as pd
 import numpy as np
@@ -52,19 +52,14 @@ losses = pd.DataFrame(
     }
 )
 pso_data = json.load(open('data.json', 'r'))
-for i in range(1):
+for i in range(100):
+    pso_data['alpha'] = random()
+    pso_data['beta'] = random()
+    pso_data['gamma'] = random()
+    pso_data['delta'] = random()
+
     pso = PSO(pso_data, (input_data, output_data), (input_data, output_data))
     best_pos, loss = pso.optimise()
-    losses = losses._append(
-        {
-            "alpha": pso_data['alpha'],
-            "beta": pso_data['beta'],
-            "gamma": pso_data['gamma'],
-            "delta": pso_data['delta'],
-            "loss": loss[-1]
-        },
-        ignore_index=True
-    )
     print(f"iteration {i} done : loss = {loss[-1]}  \n a:{pso_data['alpha']} b:{pso_data['beta']} g:{pso_data['gamma']} d:{pso_data['delta']}")
     a = ANN(pso_data['layer_sizes'], "sigmoid")
     a.set_wb(best_pos)
@@ -72,7 +67,7 @@ for i in range(1):
     print(f"expected = {output_data[:3]} : output = {out[:3]}")
     #print(f"expected = {unnormalize(output_data[:3], data_min, data_max)} : output = {unnormalize(out[:3], data_min, data_max)}")
     plt.plot(loss)
-    plt.show()
+plt.show()
 
 # print(min(losses['loss']))
 # losses.to_csv("output.csv")
