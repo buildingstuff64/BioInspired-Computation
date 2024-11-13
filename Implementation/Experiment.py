@@ -42,8 +42,7 @@ class Experiment:
         figure.tight_layout()
         if save:
             figure.savefig(f'../Experiments/{dh.get_str_name()}.png')
-        else:
-            figure.show()
+        plt.show()
 
     @staticmethod
     def run_gridSerach(step):

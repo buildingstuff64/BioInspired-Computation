@@ -30,7 +30,7 @@ class DataHandler:
         if h is None:
             h = self.hyperparameters
         str = f'{h['swarm_size']}_{h['iterations']:d}_{h['activation']}_{h['informants']}_{h['alpha']}_{h['beta']}_{h['gamma']}_{h['delta']}'
-        return str.replace(".", "")
+        return str.replace(".", ",")
 
     def get_title(self, h=None):
         if h is None:
