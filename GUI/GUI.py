@@ -59,7 +59,7 @@ def save_train(data, queue):
 def draw_fig(losses):
     with ui.matplotlib(figsize = (14, 8)).figure as fig:
         ax = fig.gca()
-        ax.set_title("Loss Over Time")
+        ax.set_title(f"Loss Over Time        Final Loss : {losses[-1] if len(losses)>0 else 0}")
         ax.set_xlabel('Iterations')
         ax.set_ylabel('Loss')
         ax.plot(losses)
@@ -129,4 +129,4 @@ async def index(client: Client):
         app.shutdown()
 
 if __name__ == '__main__':
-    ui.run(native = True, reload = False, title = "Particle Swarm Optimization", window_size = (1750, 1000))
+    ui.run(reload = False, title = "Particle Swarm Optimization")
