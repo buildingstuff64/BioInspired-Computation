@@ -7,7 +7,7 @@ from multiprocessing import Manager, Queue
 import numpy as np
 import pandas as pd
 
-from Mk2.PSO import PSO
+from Implementation.PSO import PSO
 
 progress = BindableProperty()
 
@@ -16,7 +16,7 @@ def show(event: ValueChangeEventArguments):
     ui.notify(f'{name}: {event.value}')
 
 def trainNNN(q :Queue):
-    file = pd.read_csv('../mk2/concrete_data.csv')
+    file = pd.read_csv('../Data/concrete_data.csv')
     input_data = np.array(file.iloc[:, : 8].to_numpy())
     output_data = np.array(file.iloc[:, 8:].to_numpy())
 
@@ -26,7 +26,7 @@ def trainNNN(q :Queue):
     input_data_test = input_data[-int(len(input_data) * 0.3):]
     output_data_test = output_data[-int(len(output_data) * 0.3):]
 
-    pso_data = json.load(open('../mk2/data.json', 'r'))
+    pso_data = json.load(open('../Data/hyperparameters.json', 'r'))
     pso = PSO(pso_data, (input_data_train, output_data_train), (input_data_test, output_data_test))
     best_position, l = pso.optimise(q=q)
     return l
@@ -46,7 +46,7 @@ def saveData(data):
     data['iterations'] = int(data['iterations'])
     data['informants'] = int(data['informants'])
     print(data)
-    with open('../mk2/data.json', 'w') as f:
+    with open('../Data/hyperparameters.json', 'w') as f:
         json.dump(data, f, indent=4, separators=(',', ': '))
     ui.notify(f'JSON Data Successfully Saved')
 
@@ -66,7 +66,7 @@ def draw_fig(losses):
 
 @ui.page('/')
 async def index(client: Client):
-    pso_data = json.load(open('../mk2/data.json', 'r'))
+    pso_data = json.load(open('../Data/hyperparameters.json', 'r'))
 
     with ui.row():
         with ui.card():

@@ -1,12 +1,7 @@
 {
     "swarm_size": 25,
-    "iterations": 250,
-    "layer_sizes": [
-        8,
-        8,
-        4,
-        1
-    ],
+    "iterations": 500,
+    "layer_sizes": [8,4,1],
     "activation": "sigmoid",
     "informants": 12,
     "alpha": 0.9,
