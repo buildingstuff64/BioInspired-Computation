@@ -28,4 +28,5 @@ all experiments will be outputed to [Experiments](Experiments) an example of an 
 # GUI
 there is also a GUI that can be run in the browser for easy single run testing and easy json file editing, just run the
 [GUI.py](GUI/GUI.py) script and the browser should load 
+![gui example](GuiExampleImage.png)
 
