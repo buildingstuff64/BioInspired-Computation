@@ -32,8 +32,9 @@ class DataHandler:
     def get_str_name(self, h=None):
         if h is None:
             h = self.hyperparameters
-        str = f'{h['swarm_size']}_{h['iterations']:d}_{h['activation']}_{h['informants']}_{h['alpha']}_{h['beta']}_{h['gamma']}_{h['delta']}'
+        str = f'{h['swarm_size']}_{h['iterations']:d}_{h['activation']}_{h['informants']}_{h['alpha']}_{h['beta']}_{h['gamma']}_{h['delta']}time'
         str += dt.datetime.now().time().__str__()
+        str = str.replace(":", "_")
         return str.replace(".", ",")
 
     def get_title(self, h=None):
