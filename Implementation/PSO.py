@@ -39,7 +39,6 @@ class PSO:
             #finds the best global fitness and the particles personal best fitness
             for particle in self.swarm:
                 fitness = particle.ANN.calc_loss(self.input_training_data, self.output_training_data)
-                particle.last_fitness = fitness
 
                 if fitness < particle.best_fitness:
                     particle.personal_best = particle.position.copy()
@@ -102,8 +101,6 @@ class Particle:
         self.velocity = np.random.uniform(low=-1, high=1, size=self.position.size)
         #self.velocity.clip(min=-1, max=1)
         self.personal_best = np.copy(self.position)
-        self.best_fitness = float('inf')
-        self.last_fitness = float('inf')
 
     def update_vel(self, informants_best, global_best):
         """
