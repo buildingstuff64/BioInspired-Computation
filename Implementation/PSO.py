@@ -101,6 +101,7 @@ class Particle:
         self.velocity = np.random.uniform(low=-1, high=1, size=self.position.size)
         #self.velocity.clip(min=-1, max=1)
         self.personal_best = np.copy(self.position)
+        self.best_fitness = float('inf')
 
     def update_vel(self, informants_best, global_best):
         """

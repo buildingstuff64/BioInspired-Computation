@@ -1,6 +1,9 @@
 import json
+from datetime import datetime
+
 import pandas as pd
 import numpy as np
+import datetime as dt
 
 class DataHandler:
     def __init__(self, hyper_path, train_path):
@@ -30,6 +33,7 @@ class DataHandler:
         if h is None:
             h = self.hyperparameters
         str = f'{h['swarm_size']}_{h['iterations']:d}_{h['activation']}_{h['informants']}_{h['alpha']}_{h['beta']}_{h['gamma']}_{h['delta']}'
+        str += dt.datetime.now().time().__str__()
         return str.replace(".", ",")
 
     def get_title(self, h=None):
