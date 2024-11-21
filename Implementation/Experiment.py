@@ -134,11 +134,3 @@ class Experiment:
                     loss = Experiment.run_single_experiment(dh)
                     if loss[-1] < BEST.best:
                         BEST.set(js['swarm_size'], js['iterations'], js['alpha'], js['beta'], js['gamma'], js['delta'], js['informants'], loss[-1])
-
-
-
-
-
-if __name__ == '__main__':
-    #Experiment.run_experiment_avg('../Data/hyperparameters.json', '../Data/concrete_data.csv', save=True)
-    Experiment.run_random_search(1000, 150)
